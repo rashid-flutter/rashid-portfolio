@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://protfolio-cdbec.web.app/sitemap.xml

@@ -1,0 +1,167 @@
+{
+  "projects": [
+    {
+      "id": "chat",
+      "name": "Chat",
+      "appStoreLink": "https://github.com/rashid-flutter/glitz",
+      "description": "Chat App is a modern messaging platform that enables seamless communication with friends, groups, and intelligent AI. With real-time messaging, multimedia support, and Meta AI integration, the app delivers smart, fast, and interactive conversations.",
+      "features": [
+        "Real-Time Messaging: Send and receive messages instantly with smooth, responsive chat",
+        "Group Chats: Create and manage group conversations with multiple users",
+        "Multimedia Sharing: Share images, videos, audio, documents, and more within chats",
+        "Meta AI Integration: Chat with Meta AI for instant answers, smart suggestions, and fun interactions right in the conversation",
+        "Typing & Read Indicators: Know when someone is typing or has read your message",
+        "Message Reactions: React to messages with emojis for quick, expressive replies",
+        "Dark Mode Toggle: Switch between light and dark themes for comfortable chatting anytime",
+        "Secure & Private: End-to-end encryption ensures that all messages remain confidential"
+      ],
+      "github": "https://github.com/rashid-flutter/glitz",
+      "image": "/projects/chat-app.png",
+      "link": "https://github.com/rashid-flutter/glitz",
+      "playStoreLink": "https://github.com/rashid-flutter/glitz",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firestore Database",
+        "Storage",
+        "Functions"
+      ]
+    },
+
+    {
+      "id": "edukids",
+      "name": "Edu Kids",
+      "appStoreLink": "https://github.com/rashid-flutter/leran_app",
+      "description": "Edukids is an engaging and user-friendly educational app designed for young children. The app aims to make learning fun and interactive by incorporating alphabets, numbers, words, and animated GIFs.",
+      "features": [
+        "Interactive Learning Engaging modules to teach alphabets, numbers, and common words through visual and audio cues.",
+        "Animated GIFs Fun animations to help children associate visuals with learning content, improving retention.",
+        "Kid-Friendly UI Simple navigation and large buttons tailored for small hands and easy use.",
+        "Offline Access Core features work without an internet connection, making it accessible anytime, anywhere."
+      ],
+      "github": "https://github.com/rashid-flutter/leran_app",
+      "image": "/projects/Edukids-app.avif",
+      "link": "https://github.com/rashid-flutter/leran_app",
+      "playStoreLink": "https://github.com/rashid-flutter/leran_app",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firestore Database",
+        "Storage",
+        "Functions"
+      ]
+    },
+
+    {
+      "id": "laundry",
+      "name": "Laundry Bin",
+      "appStoreLink": "https://github.com/rashid-flutter/laundry_bin",
+      "description": "Laundry Bin is a convenient and intuitive app designed to simplify laundry service management. It connects users with laundry service providers, streamlining the process of scheduling pickups, tracking orders, and making payments — all from a mobile device.",
+      "features": [
+        "Easy Booking Schedule laundry pickups and deliveries with just a few taps.",
+        "Order Tracking Real-time updates on laundry status — from pickup to delivery.",
+        "Service Options Choose from wash & fold, dry cleaning, ironing, and more.",
+        "Secure Payments Integrated online payment system with invoice generation.",
+        "Notifications & Reminders Get alerts for order updates, delivery times, and special offers.",
+        "User Profiles Manage multiple addresses, view order history, and save preferences.",
+        "Clean UI Modern and minimal interface for a smooth user experience."
+      ],
+      "github": "https://github.com/rashid-flutter/laundry_bin",
+      "image": "/projects/Laundry-app.jpg",
+      "link": "https://github.com/rashid-flutter/laundry_bin",
+      "playStoreLink": "https://github.com/rashid-flutter/laundry_bin",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firestore Database",
+        "Storage",
+        "Functions"
+      ]
+    },
+
+    {
+      "id": "pdf",
+      "name": "PDF Creator",
+      "appStoreLink": "https://www.amazon.com/Developer-PDF-APP/dp/B0D91RLFPW/ref=sr",
+      "description": "PDF Create App is a lightweight and efficient tool that allows users to easily generate PDF documents from text, images, or form inputs. Whether for reports, receipts, or notes, the app makes PDF creation quick and accessible — right from your device.",
+      "features": [
+        "Create PDFs Instantly Generate PDF files from text input, images, or document templates with a single tap.",
+        "Image to PDF Convert one or multiple images into a clean, printable PDF format.",
+        "Text to PDF Write or paste text and save it as a formatted PDF document.",
+        "PDF Sharing Instantly share created PDFs via email, messaging apps, or cloud storage platforms.",
+        "Preview Before Saving View your PDF before saving to ensure it looks exactly how you want.",
+        "Lightweight & Fast Optimized for performance with a smooth and responsive user experience.",
+        "Offline Support All features work without needing an internet connection."
+      ],
+      "github": "https://github.com/rashid-flutter/pdf-app",
+      "image": "/projects/Pdf-app.jpg",
+      "link": "https://www.amazon.com/Developer-PDF-APP/dp/B0D91RLFPW/ref=sr",
+      "playStoreLink": "https://www.amazon.com/Developer-PDF-APP/dp/B0D91RLFPW/ref=sr",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "PDF Generation Libraries",
+        "Object Storage",
+        "Firebase Functions"
+      ]
+    },
+
+    {
+      "id": "qr",
+      "name": "QR-Code Scanner and Generator",
+      "appStoreLink": "https://github.com/rashid-flutter/QR-Code-Scanner-and-Generator",
+      "description": "Scan and generate QR codes effortlessly with our all-in-one QR Code Scanner & Generator app. Easily create custom QR codes and decode them instantly. Simplify sharing information and accessing content with this versatile tool.",
+      "features": [
+        "Allows users to generate QR codes from any text, URL, or contact information.",
+        "Instantly creates a scannable QR image that can be downloaded or shared.",
+        "Great for quickly accessing links on mobile devices.",
+        "Enables users to scan QR codes using their webcam or device camera.",
+        "Automatically detects and displays the content of the scanned code.",
+        "Supports scanning for URLs, plain text, emails, and more."
+      ],
+      "github": "https://github.com/rashid-flutter/QR-Code-Scanner-and-Generator",
+      "image": "/projects/QR-app.webp",
+      "link": "https://github.com/rashid-flutter/QR-Code-Scanner-and-Generator",
+      "playStoreLink": "https://github.com/rashid-flutter/QR-Code-Scanner-and-Generator",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "QR Code Libraries",
+        "Firebase",
+        "Firestore Database",
+        "Storage",
+        "Functions"
+      ]
+    },
+
+    {
+      "id": "translate",
+      "name": "Translate",
+      "description": "ranslate App is a simple and efficient language translation tool that helps users break language barriers in real time. Designed for travelers, students, and everyday communication, it offers instant translations with a user-friendly interface.",
+      "features": [
+        "Instant Text Translation Translate words, phrases, or full sentences between multiple languages in real time.",
+        "Speech to Text Speak and get instant translations, perfect for live conversations.",
+        "Text to Speech Hear the correct pronunciation of translated text in native accents.",
+        "Language Detection Automatically detects the input language for seamless usage.",
+        "Copy & Share Quickly copy or share translated text with just one tap.",
+        "Offline Mode (Optional) Access basic translation features without an internet connection."
+      ],
+      "github": "https://github.com/rashid-flutter/Translate",
+      "image": "/projects/trans.jpg",
+      "link": "https://github.com/rashid-flutter/Translate",
+      "playStoreLink": "https://github.com/rashid-flutter/Translate",
+      "appStoreLink": "https://github.com/rashid-flutter/Translate",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firestore Database",
+        "Storage",
+        "Functions"
+      ]
+    }
+  ]
+}

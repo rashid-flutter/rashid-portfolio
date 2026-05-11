@@ -1,0 +1,9 @@
+{
+    "certificates": [
+    {
+        "id": "flutter-complete-course",
+        "name": "Flutter Complete Course",
+        "imageUrl": "/certificate/certificate.jpeg"
+    }
+    ]
+}
