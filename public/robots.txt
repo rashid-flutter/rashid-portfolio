@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://protfolio-cdbec.web.app/sitemap.xml
+Sitemap: https://rashid-dev-green.vercel.app/sitemap.xml
