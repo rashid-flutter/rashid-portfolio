@@ -1,0 +1,21 @@
+{
+  "name": "Rashid V | Software Developer",
+  "short_name": "Rashid V",
+  "description": "Rashid V - Flutter Developer and Software Developer from Kerala, India",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#030014",
+  "background_color": "#030014",
+  "display": "standalone",
+  "start_url": "/"
+}
