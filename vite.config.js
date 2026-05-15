@@ -3,8 +3,18 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/", // Must match GitHub repo name
+  base: "/",
   build: {
     outDir: "dist",
+    rollupOptions: {
+      input: {
+        main: './index.html',
+      },
+    },
+  },
+  server: {
+    headers: {
+      'Cache-Control': 'max-age=0, must-revalidate',
+    },
   },
 });
