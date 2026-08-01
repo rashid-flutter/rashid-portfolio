@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { scheduleScrollToSection } from "./utils/sectionScroll";
+import ChatWindow from "./components/ChatWindow";
 
 const Footer = () => (
   <footer>
@@ -90,6 +91,7 @@ const LandingPage = ({ showWelcome, setShowWelcome, sectionId, scrollSignal }) =
             <Portofolio />
             <ContactPage />
             <Footer />
+             <ChatWindow />
           </main>
         </motion.div>
       )}
