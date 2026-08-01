@@ -13,7 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { scheduleScrollToSection } from "./utils/sectionScroll";
-import ChatWindow from "./components/ChatWindow";
+import ChatWindow from "./components/ChatBot/ChatWindow";
 
 const Footer = () => (
   <footer>
