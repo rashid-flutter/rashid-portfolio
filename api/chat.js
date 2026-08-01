@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // Allow only POST requests
+  // Only allow POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed",
@@ -9,6 +9,12 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body;
 
+    if (!message) {
+      return res.status(400).json({
+        error: "Message is required.",
+      });
+    }
+
     // Check API Key
     if (!process.env.OPENROUTER_API_KEY) {
       return res.status(500).json({
@@ -16,11 +22,7 @@ export default async function handler(req, res) {
       });
     }
 
-    console.log("Message:", message);
-    console.log(
-      "API Key:",
-      process.env.OPENROUTER_API_KEY.substring(0, 15) + "..."
-    );
+    console.log("User:", message);
 
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
@@ -29,7 +31,7 @@ export default async function handler(req, res) {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "http://localhost:3000",
+          "HTTP-Referer": "https://rashidv-dev.vercel.app",
           "X-Title": "Rashid Portfolio",
         },
         body: JSON.stringify({
@@ -40,19 +42,25 @@ export default async function handler(req, res) {
               content: `
 You are Rashid V's AI Portfolio Assistant.
 
-Only answer questions about:
-- Rashid V
-- Flutter
-- React
+About Rashid:
+- Flutter Developer
+- React Developer
 - Firebase
+- REST API
+- Riverpod
+- Django
+- Python
+- Based in Kerala, India
+
+Only answer questions about Rashid's:
+- Skills
 - Projects
 - Experience
-- Skills
 - Resume
 - Contact
 
 If the user asks unrelated questions,
-politely reply that you are only Rashid's portfolio assistant.
+politely explain that you're only Rashid's portfolio assistant.
               `,
             },
             {
@@ -60,26 +68,33 @@ politely reply that you are only Rashid's portfolio assistant.
               content: message,
             },
           ],
+          temperature: 0.7,
+          max_tokens: 500,
         }),
       }
     );
 
     const data = await response.json();
 
-    console.log("Status:", response.status);
-    console.log("Response:", JSON.stringify(data, null, 2));
+    console.log("OpenRouter Status:", response.status);
+    console.log(JSON.stringify(data, null, 2));
 
     if (!response.ok) {
-      return res.status(response.status).json(data);
+      return res.status(response.status).json({
+        error:
+          data?.error?.message ||
+          data?.message ||
+          "OpenRouter request failed.",
+        details: data,
+      });
     }
 
     return res.status(200).json(data);
   } catch (error) {
-    console.error("Backend Error:", error);
+    console.error("Server Error:", error);
 
     return res.status(500).json({
       error: error.message,
-      stack: error.stack,
     });
   }
 }
