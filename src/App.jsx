@@ -9,11 +9,11 @@ import Portofolio from "./Pages/Portofolio";
 import ContactPage from "./Pages/Contact";
 import ProjectDetails from "./components/ProjectDetail";
 import WelcomeScreen from "./Pages/WelcomeScreen";
+import ChatWindow from "./components/ChatBot/ChatWindow";
 import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { scheduleScrollToSection } from "./utils/sectionScroll";
-import ChatWindow from "./components/ChatBot/ChatWindow";
 
 const Footer = () => (
   <footer>
@@ -91,7 +91,7 @@ const LandingPage = ({ showWelcome, setShowWelcome, sectionId, scrollSignal }) =
             <Portofolio />
             <ContactPage />
             <Footer />
-             <ChatWindow />
+            <ChatWindow />
           </main>
         </motion.div>
       )}

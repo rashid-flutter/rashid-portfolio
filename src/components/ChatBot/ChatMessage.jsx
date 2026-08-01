@@ -31,32 +31,11 @@ export default function ChatMessage({
   }, [isUser]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: isUser ? "flex-end" : "flex-start",
-        marginBottom: "18px",
-        animation: "fadeIn .35s ease",
-      }}
-    >
+    <div className={`message ${isUser ? "user" : "assistant"}`}>
       {!isUser && (
-        <div
-          style={{
-            marginRight: "10px",
-            marginTop: "4px",
-            width: "38px",
-            height: "38px",
-            borderRadius: "50%",
-            background: "linear-gradient(135deg,#7C3AED,#2563EB)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#fff",
-            flexShrink: 0,
-          }}
-        >
+        <div className="message-avatar">
           {animationData ? (
-            <div style={{ width: 34, height: 34, background: "transparent" }}>
+            <div className="message-avatar-inner">
               <Lottie
                 animationData={animationData}
                 loop
@@ -67,32 +46,12 @@ export default function ChatMessage({
               />
             </div>
           ) : (
-            <div style={{ color: "#fff", fontWeight: 700 }}>AI</div>
+            <div className="message-avatar-fallback">AI</div>
           )}
         </div>
       )}
 
-      <div
-        style={{
-          maxWidth: "78%",
-          background: isUser
-            ? "linear-gradient(135deg,#2563EB,#7C3AED)"
-            : "rgba(255,255,255,.06)",
-          color: "#fff",
-          borderRadius: isUser
-            ? "20px 20px 6px 20px"
-            : "20px 20px 20px 6px",
-          padding: "14px 16px",
-          border: isUser
-            ? "none"
-            : "1px solid rgba(255,255,255,.08)",
-          backdropFilter: "blur(20px)",
-          boxShadow: "0 8px 25px rgba(0,0,0,.25)",
-          overflowWrap: "break-word",
-          lineHeight: 1.7,
-          fontSize: "15px",
-        }}
-      >
+      <div className="message-bubble">
         <ReactMarkdown
           components={{
             code({ children }) {
@@ -115,27 +74,11 @@ export default function ChatMessage({
           {text}
         </ReactMarkdown>
 
-        <div
-          style={{
-            marginTop: "8px",
-            fontSize: "11px",
-            opacity: ".6",
-            textAlign: "right",
-          }}
-        >
-          {time}
-        </div>
+        <div className="message-time">{time}</div>
       </div>
 
       {isUser && (
-        <div
-          style={{
-            marginLeft: "10px",
-            marginTop: "4px",
-            color: "#8B5CF6",
-            flexShrink: 0,
-          }}
-        >
+        <div className="message-user-icon">
           <FaUserCircle size={34} />
         </div>
       )}
@@ -171,14 +114,6 @@ export default function ChatMessage({
 
         li{
           margin-bottom:6px;
-        }
-
-        @media(max-width:768px){
-
-          div[style*="max-width: 78%"]{
-            max-width:85%;
-          }
-
         }
       `}</style>
     </div>
