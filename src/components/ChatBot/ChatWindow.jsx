@@ -14,6 +14,7 @@ export default function ChatWindow() {
   const [loading, setLoading] = useState(false);
 
   const messagesEndRef = useRef(null);
+  const chatBodyRef = useRef(null);
 
   const [messages, setMessages] = useState([
     {
@@ -32,10 +33,23 @@ export default function ChatWindow() {
   ];
 
   useEffect(() => {
+    const body = chatBodyRef.current;
+
+    if (!body) return;
+
+    const scrollToBottom = () => {
+      body.scrollTo({
+        top: body.scrollHeight,
+        behavior: "smooth",
+      });
+    };
+
+    requestAnimationFrame(scrollToBottom);
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
+      block: "end",
     });
-  }, [messages, loading]);
+  }, [messages, loading, open]);
 
   useEffect(() => {
     fetch("/ai.json")
@@ -142,7 +156,7 @@ export default function ChatWindow() {
             ))}
           </div>
 
-          <div className="chat-body">
+          <div className="chat-body" ref={chatBodyRef}>
 
             {messages.map((msg, index) => (
               <ChatMessage
