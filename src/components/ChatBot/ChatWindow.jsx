@@ -34,17 +34,11 @@ export default function ChatWindow() {
 
   useEffect(() => {
     const body = chatBodyRef.current;
+    if (body) {
+      body.scrollTop = body.scrollHeight;
+      return;
+    }
 
-    if (!body) return;
-
-    const scrollToBottom = () => {
-      body.scrollTo({
-        top: body.scrollHeight,
-        behavior: "smooth",
-      });
-    };
-
-    requestAnimationFrame(scrollToBottom);
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "end",
