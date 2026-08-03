@@ -31,7 +31,7 @@ export default function ChatHeader({ onClose }) {
         </div>
 
         <div className="chat-info">
-            <h3>Rashid AI</h3>
+            <h3>Rashi AI</h3>
 
             <p>Portfolio Assistant</p>
 

@@ -18,11 +18,18 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "👋 Hi! I'm Rashid's AI Assistant.\nAsk me anything about my skills, experience or projects.",
+      text: "👋 Hi! I'm Rashi, your AI Assistant.\nAsk me anything about my skills, experience or projects.",
     },
   ]);
 
   const [animationData, setAnimationData] = useState(null);
+
+  const suggestions = [
+    "What services do you provide?",
+    "How can I contact you?",
+    "Tell me about your latest project",
+    "Show me your tech stack",
+  ];
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
@@ -120,6 +127,20 @@ export default function ChatWindow() {
           <ChatHeader
             onClose={() => setOpen(false)}
           />
+
+          <div className="chat-suggestions">
+            {suggestions.map((item) => (
+              <button
+                key={item}
+                type="button"
+                className="suggestion-chip"
+                onClick={() => sendMessage(item)}
+                disabled={loading}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
 
           <div className="chat-body">
 
