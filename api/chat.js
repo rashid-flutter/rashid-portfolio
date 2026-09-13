@@ -89,195 +89,233 @@ Answer the visitor directly.
     // OPENROUTER REQUEST
     // ==========================================
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
+   // ==========================================
+// OPENROUTER REQUEST
+// ==========================================
 
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": "https://rashidv-dev.vercel.app",
-          "X-Title": "Rashid V Portfolio - Rashi AI",
+const response = await fetch(
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
+    method: "POST",
+
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "HTTP-Referer": "https://rashidv-dev.vercel.app",
+      "X-Title": "Rashid V Portfolio - Rashi AI",
+    },
+
+    body: JSON.stringify({
+
+      // Primary model
+      model: "google/gemma-4-26b-a4b-it:free",
+
+      // Automatic fallback
+      models: [
+        "google/gemma-4-26b-a4b-it:free",
+        "openrouter/free"
+      ],
+
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
         },
+        {
+          role: "user",
+          content: userMessage,
+        },
+      ],
 
-        body: JSON.stringify({
+      temperature: 0.4,
 
-          // ====================================
-          // FREE ROUTER
-          // ====================================
+      max_tokens: 200,
 
-          model: "openrouter/free",
+      // Disable reasoning where supported
+      reasoning: {
+        enabled: false,
+      },
 
-          messages: [
-            {
-              role: "system",
-              content: systemPrompt,
-            },
-            {
-              role: "user",
-              content: userMessage,
-            },
-          ],
+      // Force text output
+      modalities: ["text"],
+    }),
+  }
+);
 
-          // ====================================
-          // RESPONSE SETTINGS
-          // ====================================
 
-          temperature: 0.5,
+// ==========================================
+// READ RESPONSE
+// ==========================================
 
-          // Keep answers short
-          max_tokens: 250,
+const rawText = await response.text();
 
-          // Prevent reasoning from consuming
-          // the response budget when supported
-          reasoning: {
-            enabled: false,
-          },
+console.log(
+  "OpenRouter HTTP:",
+  response.status
+);
 
-        }),
+console.log(
+  "OpenRouter RAW:",
+  rawText
+);
+
+let data;
+
+try {
+  data = JSON.parse(rawText);
+} catch (e) {
+
+  console.error(
+    "Invalid JSON from OpenRouter:",
+    rawText
+  );
+
+  return res.status(502).json({
+    error: "Invalid response from AI provider.",
+  });
+}
+
+
+// ==========================================
+// OPENROUTER ERROR
+// ==========================================
+
+if (!response.ok) {
+
+  console.error(
+    "OpenRouter Error:",
+    JSON.stringify(data, null, 2)
+  );
+
+  return res.status(502).json({
+    error:
+      data?.error?.message ||
+      "OpenRouter request failed.",
+  });
+}
+
+
+// ==========================================
+// GET CHOICE
+// ==========================================
+
+const choice = data?.choices?.[0];
+
+console.log(
+  "OpenRouter model:",
+  data?.model
+);
+
+console.log(
+  "Finish reason:",
+  choice?.finish_reason
+);
+
+console.log(
+  "Message object:",
+  JSON.stringify(
+    choice?.message,
+    null,
+    2
+  )
+);
+
+
+// ==========================================
+// GET CONTENT
+// ==========================================
+
+let reply =
+  choice?.message?.content;
+
+
+// ==========================================
+// HANDLE ARRAY CONTENT
+// ==========================================
+
+if (Array.isArray(reply)) {
+
+  reply = reply
+    .map((item) => {
+
+      if (typeof item === "string") {
+        return item;
       }
-    );
 
-    // ==========================================
-    // READ OPENROUTER RESPONSE
-    // ==========================================
+      if (
+        item &&
+        typeof item.text === "string"
+      ) {
+        return item.text;
+      }
 
-    const data = await response.json();
+      return "";
+    })
+    .join("");
+}
 
-    console.log(
-      "OpenRouter Status:",
-      response.status
-    );
 
-    console.log(
-      "OpenRouter Model:",
-      data?.model || "unknown"
-    );
+// ==========================================
+// NORMALIZE
+// ==========================================
 
-    // ==========================================
-    // OPENROUTER ERROR
-    // ==========================================
+if (typeof reply !== "string") {
+  reply = "";
+}
 
-    if (!response.ok) {
+reply = reply.trim();
 
-      console.error(
-        "OpenRouter Error:",
-        JSON.stringify(data, null, 2)
-      );
 
-      return res.status(502).json({
-        error:
-          data?.error?.message ||
-          data?.message ||
-          "OpenRouter request failed.",
-      });
-    }
+// ==========================================
+// EMPTY RESPONSE
+// ==========================================
 
-    // ==========================================
-    // GET CHOICE
-    // ==========================================
+if (!reply) {
 
-    const choice = data?.choices?.[0];
+  console.error(
+    "EMPTY AI CONTENT:",
+    JSON.stringify(data, null, 2)
+  );
 
-    if (!choice) {
-
-      console.error(
-        "No choice returned:",
-        JSON.stringify(data, null, 2)
-      );
-
-      return res.status(502).json({
-        error: "Rashi AI did not return a response.",
-      });
-    }
-
-    // ==========================================
-    // GET CONTENT
-    // ==========================================
-
-    let reply = choice?.message?.content;
-
-    // Some models/providers can return content
-    // in a non-string format.
-    if (Array.isArray(reply)) {
-
-      reply = reply
-        .map((item) => {
-
-          if (typeof item === "string") {
-            return item;
-          }
-
-          if (
-            item &&
-            typeof item.text === "string"
-          ) {
-            return item.text;
-          }
-
-          return "";
-        })
-        .join("");
-    }
-
-    if (typeof reply !== "string") {
-      reply = "";
-    }
-
-    reply = reply.trim();
-
-    console.log(
-      "Finish reason:",
-      choice?.finish_reason
-    );
-
-    console.log(
-      "Reply:",
-      reply
-    );
-
-    // ==========================================
-    // EMPTY RESPONSE
-    // ==========================================
-
-    if (!reply) {
-
-      console.error(
-        "Empty AI response:",
-        JSON.stringify(data, null, 2)
-      );
-
-      return res.status(502).json({
-        error:
-          "Rashi AI returned no text. Please try again.",
-      });
-    }
-
-    // ==========================================
-    // SUCCESS
-    // ==========================================
-
-    // Even if finish_reason is "length",
-    // return the available text instead of
-    // throwing away the response.
-
-    return res.status(200).json({
-
-      // Main field
-      reply: reply,
-
-      // Compatibility fields
-      message: reply,
-      content: reply,
-      response: reply,
-
-      // Debug information
-      model: data?.model || "openrouter/free",
+  return res.status(502).json({
+    error:
+      "AI provider returned no text.",
+    debug: {
+      model: data?.model || null,
       finish_reason:
         choice?.finish_reason || null,
-    });
+      message:
+        choice?.message || null,
+    },
+  });
+}
 
+
+// ==========================================
+// SUCCESS
+// ==========================================
+
+console.log(
+  "FINAL RASHI AI REPLY:",
+  reply
+);
+
+return res.status(200).json({
+
+  reply: reply,
+
+  // Multiple fields for frontend compatibility
+  message: reply,
+  content: reply,
+  response: reply,
+
+  model:
+    data?.model ||
+    "google/gemma-4-26b-a4b-it:free",
+
+  finish_reason:
+    choice?.finish_reason || null,
+});
   } catch (error) {
 
     // ==========================================
